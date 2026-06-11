@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Île Maurice · Notre anniversaire de mariage</title>
+
+<!-- ============================================================= -->
+<!--  ⚙️  CONFIGURATION — MODIFIE UNIQUEMENT CETTE PARTIE           -->
+<!--  Tout ce que tu dois personnaliser est entre les balises      -->
+<!--  <script id="config">. Pas besoin de toucher au reste.        -->
+<!-- ============================================================= -->
+<script id="config">
+window.SEJOUR = {
+
+  /* ---------- 1. INFOS GÉNÉRALES ---------- */
+  titre: "Maroa & Bertrand",
+  sousTitre: "Anniversaire de mariage · Île Maurice",
+  dates: "Du 3 au 11 octobre 2026",
+  motAccueil:
+    "On a tellement hâte de fêter ça avec vous au bout du monde ! " +
+    "Vous trouverez ici toutes les infos pratiques, le programme, " +
+    "et de quoi garder de beaux souvenirs. À très vite sous les tropiques 🌴",
+
+  // ⭐ Encart « à ne pas manquer » mis en avant sur l'accueil (laisse "" pour le cacher)
+  evenementPhare: {
+    titre: "À noter : soirée d'anniversaire de mariage — Mardi 6 octobre",
+    texte: "Barbecue terre & mer sur la terrasse de la villa, dès 19h30.",
+    dressCode: "Dress code : Beach Elegant — tout en blanc 🤍 (pensez à le glisser dans la valise !)"
+  },
+
+  /* ---------- 2. INFOS PRATIQUES ---------- */
+  infos: [
+    { icone: "🏝️", titre: "La villa", texte: "Bellu & Belpe — Belle Rivière Estate, Bel Ombre, Île Maurice (à 250 m de la plage)" },
+    { icone: "🍽️", titre: "Repas", texte: "Tous les repas sont inclus — pension complète, cuisine sur place 🥂" },
+    { icone: "🛬", titre: "Aéroport", texte: "Sir Seewoosagur Ramgoolam (MRU) — ~45 min de route jusqu'à la villa" },
+    { icone: "📅", titre: "Arrivée / Départ", texte: "Check-in dès 15h le 03/10 · Check-out 11h le 11/10" },
+    { icone: "🌡️", titre: "Météo / À prévoir", texte: "25–28°C. Maillot, crème solaire, tenue légère + une petite laine pour le soir" },
+    { icone: "📞", titre: "Contacts", texte: "Bertrand : +33 6 41 08 59 15 · Maroa : +33 6 46 36 24 58" }
+  ],
+  // 📍 Optionnel : lien Google Maps de la villa (laisse vide "" pour masquer le bouton)
+  lienCarte: "https://maps.google.com/?q=Belle+Riviere+Estate+Bel+Ombre+Mauritius",
+
+  // 🌿 Encart "règles de vie" affiché dans Infos pratiques (laisse texte vide "" pour le cacher)
+  regleDeVie: {
+    titre: "Nos règles de vie ✨",
+    texte: "Ici, rien n'est obligatoire ! Toutes les activités sont 100 % optionnelles — " +
+      "personne n'oblige personne à faire quoi que ce soit. On a choisi ce groupe avec soin : " +
+      "bonne ambiance, humour, bienveillance et fun au programme. L'objectif, ce sont des " +
+      "souvenirs mémorables, chacun à son rythme. 💛"
+  },
+
+  /* ---------- 3. AGENDA DES ACTIVITÉS ---------- */
+  // Chaque activité peut avoir sa propre date limite d'inscription :
+  //   deadline    = texte affiché (ex. "1er septembre 2026") — laisse "" pour ne rien afficher
+  //   deadlineISO = date AAAA-MM-JJ qui verrouille les boutons une fois passée — laisse "" pour ne jamais verrouiller
+  activites: [
+    { id: "a1", jour: "Sam 3 oct", horaire: "15:00", titre: "Arrivée & installation à la villa", lieu: "Villa Bellu & Belpe", prix: 0, deadline: "", deadlineISO: "", desc: "Récupération des chambres et apéro de bienvenue au bord de la piscine." },
+    { id: "a2", jour: "Dim 4 oct", horaire: "09:30", titre: "Sortie en bateau", lieu: "Lagon de Bel Ombre", prix: 0, deadline: "20 septembre 2026", deadlineISO: "2026-09-20", desc: "Journée en mer le long de la côte sud : baignade et snorkeling." },
+    { id: "a3", jour: "Lun 5 oct", horaire: "10:00", titre: "Initiation surf", lieu: "Plage de Bel Ombre", prix: 0, deadline: "20 septembre 2026", deadlineISO: "2026-09-20", desc: "Cours d'initiation encadré, pour tous les niveaux. Débutants bienvenus !" },
+    { id: "a4", jour: "Mar 6 oct", horaire: "19:30", titre: "🎉 Soirée d'anniversaire de mariage", lieu: "Villa — terrasse", prix: 0, highlight: true, deadline: "15 septembre 2026", deadlineISO: "2026-09-15", desc: "LE moment de la semaine : barbecue terre & mer. Tenue : beach elegant, tout en blanc. ✨" },
+    { id: "a5", jour: "Mer 7 oct", horaire: "08:30", titre: "Randonnée", lieu: "Parc national de Black River Gorges", prix: 0, deadline: "20 septembre 2026", deadlineISO: "2026-09-20", desc: "Balade nature entre forêts, points de vue et cascades." },
+    { id: "a6", jour: "Jeu 8 oct", horaire: "Libre", titre: "Journée détente / plage", lieu: "Villa & plage", prix: 0, deadline: "", deadlineISO: "", desc: "Repos, farniente, piscine. Rien d'organisé, profitez !" },
+    { id: "a7", jour: "Ven 9 oct", horaire: "Libre", titre: "Journée libre", lieu: "Villa & alentours", prix: 0, deadline: "", deadlineISO: "", desc: "Au gré de vos envies pour le dernier jour complet." },
+    { id: "a8", jour: "Dim 11 oct", horaire: "11:00", titre: "Départ & transferts aéroport", lieu: "Villa → MRU", prix: 0, deadline: "", deadlineISO: "", desc: "Check-out. Transferts groupés selon les vols." }
+  ],
+
+  /* ---------- 4. LA VILLA ---------- */
+  villa: {
+    nom: "Bellu & Belpe",
+    sousTitre: "Deux villas de luxe mitoyennes · Belle Rivière Estate, Bel Ombre",
+    intro:
+      "Notre QG pour la semaine : une paire de villas adjacentes nichées dans un domaine privé " +
+      "à seulement 250 m de la plage, avec plus de 3000 m² de jardins tropicaux et l'accès aux " +
+      "installations du Sofitel voisin. De quoi loger tout le monde confortablement.",
+    // chiffres clés
+    stats: [
+      { n: "7", l: "Chambres" },
+      { n: "21", l: "Voyageurs" },
+      { n: "7", l: "Salles de bain" },
+      { n: "250 m", l: "De la plage" }
+    ],
+    // photos de la galerie — REMPLACE par les liens de tes propres photos quand tu les auras
+    photos: [
+      "https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1000&q=80"
+    ],
+    // équipements / ce qui est inclus
+    equipements: [
+      "🍽️ Tous les repas inclus (pension complète)",
+      "👨‍🍳 House manager & repas de bienvenue",
+      "🧹 Ménage quotidien (sauf dim. & jours fériés)",
+      "🏊 Piscine privée & grands jardins",
+      "❄️ Climatisation dans toutes les chambres",
+      "🔥 Espace barbecue",
+      "📶 Wi-Fi gratuit",
+      "🏖️ Accès plage, piscine & transats du Sofitel",
+      "🛁 Chambres toutes en suite (salle de bain privée)"
+    ],
+    // configuration des chambres
+    chambres:
+      "Villa Bellu : 3 chambres · Villa Belpe : 4 chambres, toutes avec salle de bain privée (en suite). " +
+      "Grands lits king-size dans les chambres principales.",
+    // règles de la maison (modifiables)
+    regles: [
+      "🕒 Arrivée à partir de 15h · départ avant 11h",
+      "🚭 Non-fumeur à l'intérieur (terrasses & jardins OK)",
+      "🤫 Calme après 23h par respect du voisinage",
+      "🐾 Animaux non admis",
+      "♻️ On laisse la villa aussi belle qu'on l'a trouvée 🌿"
+    ],
+    lienAnnonce: "https://mauritius.tripter.com/property/bel-ombre-neighbouring-luxury-villas-for-large-groups"
+  }
+};
+</script>
+<!-- ============================================================= -->
+<!--  FIN DE LA CONFIGURATION                                      -->
+<!-- ============================================================= -->
+
+<!-- ⚙️ SUPABASE (optionnel) — laisse vide pour le mode démo local.
+     Pour synchroniser entre invités, suis le guide GUIDE-INSTALLATION.md
+     puis colle ici tes 2 valeurs. -->
+<script id="supabase-config">
+window.SUPABASE_URL = "";       // ex: "https://abcd1234.supabase.co"
+window.SUPABASE_ANON_KEY = "";  // ta clé publique "anon"
+</script>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@300;400;500;600&display=swap');
+:root{
+  --vert:#114b3f; --vert-d:#0a2f27; --vert-l:#2e6f60;
+  --or:#c9a24b; --or-d:#a8842f; --or-l:#e6cf94;
+  --creme:#f6efe2; --creme-d:#e7dcc4; --blanc:#fffdf7;
+  --encre:#16241f; --gris:#6b7a73;
+  --ombre:0 14px 40px rgba(10,47,39,.16); --ombre-s:0 5px 18px rgba(10,47,39,.10);
+  --r:6px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Jost',-apple-system,system-ui,sans-serif;color:var(--encre);
+  background:var(--creme);line-height:1.65;font-weight:300}
+h1,h2,h3{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;line-height:1.15}
+img{max-width:100%;display:block}
+
+/* ---- NAV ---- */
+nav{position:sticky;top:0;z-index:50;background:rgba(246,239,226,.92);
+  backdrop-filter:blur(10px);border-bottom:1px solid var(--creme-d);
+  display:flex;justify-content:center;gap:4px;flex-wrap:wrap;padding:12px 14px}
+nav button{font-family:'Jost',sans-serif;font-size:13px;font-weight:500;letter-spacing:1.5px;
+  text-transform:uppercase;cursor:pointer;border:none;background:transparent;color:var(--gris);
+  padding:8px 16px;border-bottom:2px solid transparent;transition:.2s}
+nav button:hover{color:var(--vert)}
+nav button.actif{color:var(--vert);border-bottom-color:var(--or)}
+
+/* ---- HERO ---- */
+header.hero{position:relative;text-align:center;color:var(--blanc);padding:120px 20px 110px;
+  background:linear-gradient(180deg,rgba(10,47,39,.5),rgba(10,47,39,.82)),
+    url("https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?auto=format&fit=crop&w=1600&q=80") center/cover}
+header.hero:after{content:"";position:absolute;inset:18px;border:1px solid rgba(230,207,148,.55);pointer-events:none}
+header.hero .kicker{letter-spacing:5px;text-transform:uppercase;font-size:12px;color:var(--or-l);margin-bottom:18px;font-weight:400}
+header.hero h1{font-size:clamp(46px,8vw,86px);font-weight:600;margin-bottom:12px;text-shadow:0 2px 24px rgba(0,0,0,.3)}
+header.hero .sub{font-size:clamp(17px,3vw,23px);font-style:italic;font-family:'Cormorant Garamond',serif;opacity:.96}
+header.hero .dates{margin-top:22px;display:inline-block;border:1px solid var(--or-l);color:var(--or-l);
+  padding:9px 26px;font-size:13px;letter-spacing:2px;text-transform:uppercase}
+
+/* ---- SECTIONS ---- */
+main{max-width:1020px;margin:0 auto;padding:0 18px}
+section{padding:64px 0;scroll-margin-top:74px}
+.hidden{display:none}
+.titre-sec{text-align:center;margin-bottom:6px;font-size:clamp(32px,5vw,46px);color:var(--vert);font-weight:600}
+.titre-sec:after{content:"❧";display:block;color:var(--or);font-size:22px;margin:10px auto 0;font-family:serif}
+.intro-sec{text-align:center;color:var(--gris);max-width:660px;margin:0 auto 40px;font-size:17px}
+
+/* ---- INFOS CARDS ---- */
+.grille-infos{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+.carte{background:var(--blanc);border-radius:var(--r);padding:26px;box-shadow:var(--ombre-s);
+  border:1px solid var(--creme-d);border-top:3px solid var(--or);transition:.2s}
+.carte:hover{transform:translateY(-3px);box-shadow:var(--ombre)}
+.carte .ic{font-size:28px;margin-bottom:10px}
+.carte h3{font-size:22px;margin-bottom:6px;color:var(--vert)}
+.carte p{color:var(--gris);font-size:15px}
+.mot-accueil{background:var(--blanc);border:1px solid var(--creme-d);border-radius:var(--r);padding:34px;
+  box-shadow:var(--ombre-s);text-align:center;font-size:19px;font-style:italic;
+  font-family:'Cormorant Garamond',serif;color:var(--encre);max-width:780px;margin:0 auto 30px}
+.btn-carte{display:inline-flex;align-items:center;gap:8px;margin-top:10px;text-decoration:none;
+  background:var(--vert);color:var(--blanc);padding:11px 24px;border-radius:999px;font-size:13px;
+  letter-spacing:1px;text-transform:uppercase}
+
+/* ---- ENCART RÈGLES DE VIE ---- */
+.regle-vie{max-width:780px;margin:34px auto 0;background:var(--blanc);border:1px solid var(--creme-d);
+  border-left:4px solid var(--vert);border-radius:var(--r);padding:28px 32px;box-shadow:var(--ombre-s);text-align:center}
+.regle-vie h3{color:var(--vert);font-size:26px;margin-bottom:10px}
+.regle-vie p{color:var(--encre);font-size:17px;font-family:'Cormorant Garamond',serif;font-style:italic;line-height:1.6}
+
+/* ---- ENCART ÉVÉNEMENT PHARE ---- */
+.phare{max-width:780px;margin:0 auto 30px;border-radius:var(--r);overflow:hidden;position:relative;
+  background:linear-gradient(135deg,var(--vert-d),var(--vert));color:var(--blanc);
+  border:1px solid var(--or);box-shadow:var(--ombre)}
+.phare .ruban{position:absolute;top:16px;right:-36px;transform:rotate(45deg);background:var(--or);
+  color:var(--vert-d);font-size:11px;font-weight:600;letter-spacing:1px;padding:5px 42px;text-transform:uppercase}
+.phare .in{padding:30px 32px}
+.phare h3{font-size:26px;margin-bottom:8px;color:var(--or-l)}
+.phare .ev-txt{font-size:15px;opacity:.95;margin-bottom:18px}
+.phare .ev-dress{display:inline-block;background:var(--or-l);color:var(--vert-d);font-weight:600;
+  font-size:15px;padding:11px 22px;border-radius:999px}
+
+/* ---- VILLA ---- */
+.villa-stats{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin:0 auto 30px;max-width:780px}
+.villa-stats .stat{flex:1 1 130px;background:var(--blanc);border:1px solid var(--creme-d);
+  border-radius:var(--r);padding:20px 12px;text-align:center;box-shadow:var(--ombre-s)}
+.villa-stats .stat .n{font-family:'Cormorant Garamond',serif;font-size:36px;color:var(--vert);line-height:1}
+.villa-stats .stat .l{font-size:12px;color:var(--or-d);margin-top:6px;text-transform:uppercase;letter-spacing:1.5px}
+.villa-intro{max-width:740px;margin:0 auto 32px;text-align:center;color:var(--encre);font-size:18px;
+  font-family:'Cormorant Garamond',serif;font-style:italic}
+.villa-galerie{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:36px}
+@media(max-width:680px){.villa-galerie{grid-template-columns:repeat(2,1fr)}}
+.villa-galerie img{width:100%;height:210px;object-fit:cover;border-radius:var(--r);box-shadow:var(--ombre-s);
+  cursor:pointer;transition:.3s;border:1px solid var(--creme-d)}
+.villa-galerie img:hover{transform:scale(1.03)}
+.villa-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px}
+@media(max-width:680px){.villa-grid{grid-template-columns:1fr}}
+.villa-bloc{background:var(--blanc);border:1px solid var(--creme-d);border-radius:var(--r);
+  padding:28px 30px;box-shadow:var(--ombre-s)}
+.villa-bloc h3{color:var(--vert);font-size:23px;margin-bottom:14px}
+.villa-bloc ul{list-style:none}
+.villa-bloc li{padding:8px 0;border-bottom:1px solid var(--creme-d);font-size:15px;color:var(--encre)}
+.villa-bloc li:last-child{border-bottom:none}
+.villa-texte{font-size:15px;color:var(--gris)}
+
+/* ---- AGENDA ---- */
+.activite{display:flex;gap:22px;background:var(--blanc);border-radius:var(--r);padding:22px 24px;
+  box-shadow:var(--ombre-s);border:1px solid var(--creme-d);border-left:3px solid var(--or);
+  margin-bottom:16px;align-items:flex-start;flex-wrap:wrap}
+.activite.highlight{background:linear-gradient(135deg,var(--vert-d),var(--vert));color:var(--blanc);
+  border:1px solid var(--or);border-left:6px solid var(--or);box-shadow:0 14px 38px rgba(10,47,39,.30)}
+.activite.highlight .jour{color:var(--or-l)}
+.activite.highlight .heure,.activite.highlight .act-corps h3{color:var(--or-l)}
+.activite.highlight .act-corps p,.activite.highlight .act-meta{color:#e9e2d0 !important}
+.activite.highlight .tag-prix{background:rgba(255,255,255,.12);border-color:var(--or-l);color:var(--or-l)}
+.activite.highlight .rsvp-q{color:#cfd8d2}
+.badge-soiree{display:inline-block;background:var(--or);color:var(--vert-d);font-size:11px;font-weight:600;
+  letter-spacing:1px;text-transform:uppercase;padding:4px 13px;border-radius:999px;margin-bottom:8px}
+.act-date{flex:0 0 120px;text-align:center}
+.act-date .jour{font-weight:500;color:var(--or-d);font-size:13px;letter-spacing:1px;text-transform:uppercase}
+.act-date .heure{font-size:30px;font-family:'Cormorant Garamond',serif;color:var(--vert)}
+.act-corps{flex:1;min-width:200px}
+.act-corps h3{font-size:23px;margin-bottom:4px;color:var(--encre)}
+.act-meta{font-size:14px;color:var(--gris);margin-bottom:8px}
+.act-meta .puce{display:inline-block;margin-right:12px}
+.tag-prix{background:var(--creme);border:1px solid var(--creme-d);border-radius:999px;padding:2px 12px;
+  font-weight:500;color:var(--or-d);font-size:13px}
+.tag-gratuit{color:var(--vert-l)}
+.act-rsvp{flex:0 0 auto;display:flex;flex-direction:column;gap:8px;align-items:stretch;min-width:160px}
+.rsvp-q{font-size:12px;font-weight:500;color:var(--gris);text-transform:uppercase;letter-spacing:1px}
+.rsvp-btns{display:flex;gap:8px}
+.rsvp-btns button{flex:1;font-family:'Jost',sans-serif;font-size:13px;font-weight:500;cursor:pointer;
+  border:1px solid var(--creme-d);background:#fff;color:var(--gris);padding:9px 6px;border-radius:var(--r);transition:.15s}
+.rsvp-btns button:hover{border-color:var(--vert)}
+.rsvp-btns button.oui-on{background:var(--vert);border-color:var(--vert);color:var(--blanc)}
+.rsvp-btns button.non-on{background:var(--or-d);border-color:var(--or-d);color:#fff}
+.rsvp-count{font-size:12px;color:var(--gris)}
+.rsvp-count b{color:var(--vert)}
+.rsvp-liste{list-style:none;margin-top:6px;display:flex;flex-direction:column;gap:4px}
+.rsvp-liste li{font-size:13px;color:var(--vert);background:var(--creme);border:1px solid var(--creme-d);border-radius:999px;padding:3px 11px;width:fit-content}
+.activite.highlight .rsvp-liste li{background:rgba(255,255,255,.92);border-color:var(--or-l)}
+.deadline-banner{max-width:760px;margin:0 auto 26px;text-align:center;background:var(--creme);
+  border:1px dashed var(--or);border-radius:var(--r);padding:14px 20px;color:var(--vert);font-size:15px}
+.deadline-banner b{color:var(--or-d)}
+.deadline-banner.closed{background:#f7e7df;border-color:#c98a6a;color:#8a4b32}
+.rsvp-btns button:disabled{opacity:.45;cursor:not-allowed}
+.rsvp-btns button:disabled:hover{border-color:var(--creme-d)}
+.rsvp-deadline{font-size:12px;color:var(--or-d);font-weight:500}
+.rsvp-deadline.past{color:#8a4b32}
+.activite.highlight .rsvp-deadline{color:var(--or-l)}
+.btn-desinscrire{margin-top:6px;background:none;border:none;color:var(--gris);font-size:12px;
+  text-decoration:underline;cursor:pointer;padding:2px 0;font-family:'Jost',sans-serif;align-self:flex-start}
+.btn-desinscrire:hover{color:#8a4b32}
+.btn-desinscrire:disabled{opacity:.4;cursor:not-allowed;text-decoration:none}
+.activite.highlight .btn-desinscrire{color:#e9e2d0}
+.activite.highlight .btn-desinscrire:hover{color:#fff}
+
+/* ---- ALBUM ---- */
+.album-actions{text-align:center;margin-bottom:26px}
+.galerie{column-count:3;column-gap:14px}
+@media(max-width:760px){.galerie{column-count:2}}
+@media(max-width:460px){.galerie{column-count:1}}
+.galerie figure{break-inside:avoid;margin:0 0 14px;border-radius:var(--r);overflow:hidden;
+  box-shadow:var(--ombre-s);background:var(--blanc);border:1px solid var(--creme-d)}
+.galerie img{width:100%;cursor:pointer;transition:.3s}
+.galerie figure:hover img{transform:scale(1.04)}
+.galerie figcaption{padding:8px 12px;font-size:13px;color:var(--gris)}
+.album-vide{text-align:center;color:var(--gris);padding:44px;border:1px dashed var(--or);border-radius:var(--r)}
+
+/* ---- LIVRE D'OR ---- */
+.formulaire{background:var(--blanc);border:1px solid var(--creme-d);border-radius:var(--r);padding:30px;
+  box-shadow:var(--ombre-s);max-width:640px;margin:0 auto 36px}
+.formulaire label{display:block;font-weight:500;font-size:13px;letter-spacing:1px;text-transform:uppercase;margin:0 0 8px;color:var(--vert)}
+.formulaire input,.formulaire textarea{width:100%;font-family:'Jost',sans-serif;font-size:15px;padding:13px 15px;
+  border:1px solid var(--creme-d);border-radius:var(--r);background:var(--creme);margin-bottom:16px;color:var(--encre)}
+.formulaire input:focus,.formulaire textarea:focus{outline:none;border-color:var(--or);background:#fff}
+.formulaire textarea{min-height:110px;resize:vertical}
+.btn{display:inline-block;font-family:'Jost',sans-serif;font-size:13px;font-weight:500;letter-spacing:1.5px;
+  text-transform:uppercase;cursor:pointer;border:none;background:var(--or-d);color:#fff;padding:14px 34px;
+  border-radius:999px;transition:.2s;box-shadow:var(--ombre-s)}
+.btn:hover{background:var(--or);color:var(--vert-d);transform:translateY(-2px)}
+.btn.turq{background:var(--vert)}.btn.turq:hover{background:var(--vert-d);color:#fff}
+.messages{display:grid;gap:16px;max-width:780px;margin:0 auto}
+.message{background:var(--blanc);border:1px solid var(--creme-d);border-radius:var(--r);padding:22px 26px;
+  box-shadow:var(--ombre-s);border-left:3px solid var(--or)}
+.message .txt{font-size:18px;font-style:italic;font-family:'Cormorant Garamond',serif;color:var(--encre);margin-bottom:10px}
+.message .sig{font-weight:500;color:var(--vert);letter-spacing:.5px}
+.message .date{font-size:12px;color:var(--gris);float:right}
+
+/* ---- LIGHTBOX ---- */
+.lightbox{position:fixed;inset:0;background:rgba(10,47,39,.94);display:flex;align-items:center;
+  justify-content:center;z-index:100;padding:30px;cursor:zoom-out}
+.lightbox img{max-width:92%;max-height:90%;border-radius:4px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+
+/* ---- BANNIÈRE / FOOTER / MODALS ---- */
+.bandeau-mode{text-align:center;font-size:12px;letter-spacing:1px;padding:8px;background:var(--creme-d);color:var(--gris)}
+.bandeau-mode.live{background:var(--vert);color:var(--or-l);font-weight:500}
+footer{text-align:center;padding:46px 20px;background:var(--vert-d);color:var(--creme-d);font-size:14px;letter-spacing:.5px}
+footer .coeur{color:var(--or)}
+.gate{position:fixed;inset:0;background:rgba(10,47,39,.65);display:flex;align-items:center;justify-content:center;z-index:200;padding:20px}
+.gate .box{background:var(--blanc);border:1px solid var(--or);border-radius:var(--r);padding:36px;max-width:420px;width:100%;box-shadow:var(--ombre);text-align:center}
+.gate h3{color:var(--vert);font-size:30px;margin-bottom:8px}
+.gate p{color:var(--gris);margin-bottom:18px;font-size:15px}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(120px);background:var(--vert-d);
+  color:var(--or-l);padding:13px 28px;border-radius:999px;font-weight:500;letter-spacing:.5px;box-shadow:var(--ombre);z-index:300;transition:.35s;opacity:0}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+
+</style>
+</head>
+<body>
+
+<div id="bandeau" class="bandeau-mode">Mode démo (données enregistrées sur cet appareil uniquement)</div>
+
+<nav id="nav">
+  <button data-sec="accueil" class="actif">Accueil</button>
+  <button data-sec="villa">La villa</button>
+  <button data-sec="infos">Infos pratiques</button>
+  <button data-sec="agenda">Agenda &amp; RSVP</button>
+  <button data-sec="album">Album photo</button>
+  <button data-sec="livredor">Livre d'or</button>
+</nav>
+
+<header class="hero">
+  <div class="kicker" id="h-dates"></div>
+  <h1 id="h-titre"></h1>
+  <div class="sub" id="h-sous"></div>
+  <div class="dates" id="h-datesbadge"></div>
+</header>
+
+<main>
+
+  <!-- ACCUEIL -->
+  <section id="accueil">
+    <h2 class="titre-sec">On fête notre anniversaire de mariage 🌺</h2>
+    <p class="intro-sec">Maroa &amp; Bertrand vous invitent à célébrer leur anniversaire de mariage à l'île Maurice, du 3 au 11 octobre 2026.</p>
+    <div class="mot-accueil" id="mot-accueil"></div>
+    <div id="phare-accueil"></div>
+    <div class="grille-infos" id="apercu-infos"></div>
+  </section>
+
+  <!-- VILLA -->
+  <section id="villa" class="hidden">
+    <h2 class="titre-sec" id="villa-nom"></h2>
+    <p class="intro-sec" id="villa-sous"></p>
+    <div class="villa-stats" id="villa-stats"></div>
+    <p class="villa-intro" id="villa-intro"></p>
+    <div class="villa-galerie" id="villa-galerie"></div>
+    <div class="villa-grid">
+      <div class="villa-bloc">
+        <h3>✨ Ce qui est inclus</h3>
+        <ul id="villa-equip"></ul>
+      </div>
+      <div class="villa-bloc">
+        <h3>🛏️ Les chambres</h3>
+        <p id="villa-chambres" class="villa-texte"></p>
+        <h3 style="margin-top:18px">📋 Règles de la maison</h3>
+        <ul id="villa-regles"></ul>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:8px" id="villa-lien-wrap"></div>
+  </section>
+
+  <!-- INFOS -->
+  <section id="infos" class="hidden">
+    <h2 class="titre-sec">Infos pratiques</h2>
+    <p class="intro-sec">Tout ce qu'il faut savoir pour profiter du séjour en toute sérénité.</p>
+    <div class="grille-infos" id="grille-infos"></div>
+    <div id="regle-de-vie"></div>
+  </section>
+
+  <!-- AGENDA -->
+  <section id="agenda" class="hidden">
+    <h2 class="titre-sec">Agenda des activités</h2>
+    <p class="intro-sec">Indiquez votre participation à chaque activité. Les prix sont par personne (paiement réglé sur place, rien à saisir ici).</p>
+    <div id="liste-activites"></div>
+  </section>
+
+  <!-- ALBUM -->
+  <section id="album" class="hidden">
+    <h2 class="titre-sec">Album photo</h2>
+    <p class="intro-sec">Partagez vos plus belles photos du séjour pour qu'on reparte tous avec des souvenirs plein la tête.</p>
+    <div class="album-actions">
+      <input type="file" id="photo-input" accept="image/*" multiple style="display:none" />
+      <button class="btn turq" id="btn-ajouter-photo">📷 Ajouter des photos</button>
+    </div>
+    <div class="galerie" id="galerie"></div>
+    <div class="album-vide" id="album-vide">Aucune photo pour l'instant — soyez le premier à en ajouter !</div>
+  </section>
+
+  <!-- LIVRE D'OR -->
+  <section id="livredor" class="hidden">
+    <h2 class="titre-sec">Livre d'or</h2>
+    <p class="intro-sec">Laissez un petit mot aux mariés 💌</p>
+    <div class="formulaire">
+      <label for="ld-msg">Votre message</label>
+      <textarea id="ld-msg" placeholder="Un souvenir, un vœu, un mot doux..."></textarea>
+      <button class="btn" id="btn-livredor">Envoyer mon message</button>
+    </div>
+    <div class="messages" id="messages-livredor"></div>
+  </section>
+
+</main>
+
+<footer>
+  Fait avec <span class="coeur">♥</span> pour notre anniversaire de mariage · Île Maurice 2026
+</footer>
+
+<div id="toast" class="toast"></div>
+
+<script>
+/* =====================================================================
+   LOGIQUE DE L'APPLICATION
+   Mode "live" si Supabase est configuré, sinon "démo" via localStorage.
+   ===================================================================== */
+(function(){
+  const S = window.SEJOUR;
+  const hasSupa = !!(window.SUPABASE_URL && window.SUPABASE_ANON_KEY);
+  let supa = null;
+  const LSK = "sejour_maurice_v1";
+
+  /* ---------- Identité de l'invité (nom) ---------- */
+  function getNom(){ return localStorage.getItem(LSK+"_nom") || ""; }
+  function setNom(n){ localStorage.setItem(LSK+"_nom", n); }
+
+  /* ---------- Stockage local (mode démo) ---------- */
+  function lsGet(k){ try{return JSON.parse(localStorage.getItem(LSK+"_"+k))||[]}catch(e){return[]} }
+  function lsSet(k,v){ localStorage.setItem(LSK+"_"+k, JSON.stringify(v)); }
+  function lsRsvp(){ try{return JSON.parse(localStorage.getItem(LSK+"_rsvp"))||{}}catch(e){return{}} }
+  function lsRsvpSet(o){ localStorage.setItem(LSK+"_rsvp", JSON.stringify(o)); }
+
+  /* ---------- Toast ---------- */
+  const toastEl = document.getElementById("toast");
+  let toastT;
+  function toast(msg){
+    toastEl.textContent = msg; toastEl.classList.add("show");
+    clearTimeout(toastT); toastT = setTimeout(()=>toastEl.classList.remove("show"), 2600);
+  }
+
+  /* ---------- Remplissage du contenu statique ---------- */
+  document.getElementById("h-titre").textContent = S.titre;
+  document.getElementById("h-sous").textContent = S.sousTitre;
+  document.getElementById("h-dates").textContent = "🌴 Île Maurice 🌴";
+  document.getElementById("h-datesbadge").textContent = S.dates;
+  document.getElementById("mot-accueil").textContent = S.motAccueil;
+
+  // Encart événement phare (dress code) sur l'accueil
+  const ev = S.evenementPhare;
+  if(ev && ev.titre){
+    document.getElementById("phare-accueil").innerHTML =
+      `<div class="phare"><div class="ruban">À ne pas manquer</div><div class="in">
+        <h3>${ev.titre}</h3>
+        ${ev.texte ? `<div class="ev-txt">${ev.texte}</div>` : ""}
+        ${ev.dressCode ? `<span class="ev-dress">${ev.dressCode}</span>` : ""}
+      </div></div>`;
+  }
+
+  function carteInfo(i){
+    return `<div class="carte"><div class="ic">${i.icone}</div>
+      <h3>${i.titre}</h3><p>${i.texte}</p></div>`;
+  }
+  // aperçu (3 premières) sur l'accueil + bouton carte
+  let apercu = S.infos.slice(0,3).map(carteInfo).join("");
+  document.getElementById("apercu-infos").innerHTML = apercu;
+  // grille complète
+  let grille = S.infos.map(carteInfo).join("");
+  if(S.lienCarte){
+    grille += `<div class="carte"><div class="ic">🗺️</div><h3>Localisation</h3>
+      <p>Ouvrir l'emplacement de la villa dans Google Maps.</p>
+      <a class="btn-carte" href="${S.lienCarte}" target="_blank" rel="noopener">Voir la carte →</a></div>`;
+  }
+  document.getElementById("grille-infos").innerHTML = grille;
+
+  // Encart "règles de vie"
+  const rdv = S.regleDeVie;
+  if(rdv && rdv.texte){
+    document.getElementById("regle-de-vie").innerHTML =
+      `<div class="regle-vie"><h3>${rdv.titre||"Règles de vie"}</h3><p>${rdv.texte}</p></div>`;
+  }
+
+  /* ---------- Section Villa ---------- */
+  const V = S.villa;
+  if(V){
+    document.getElementById("villa-nom").textContent = V.nom;
+    document.getElementById("villa-sous").textContent = V.sousTitre || "";
+    document.getElementById("villa-intro").textContent = V.intro || "";
+    document.getElementById("villa-chambres").textContent = V.chambres || "";
+    document.getElementById("villa-stats").innerHTML =
+      (V.stats||[]).map(s=>`<div class="stat"><div class="n">${s.n}</div><div class="l">${s.l}</div></div>`).join("");
+    document.getElementById("villa-galerie").innerHTML =
+      (V.photos||[]).map(p=>`<img src="${p}" loading="lazy" alt="La villa" />`).join("");
+    document.getElementById("villa-equip").innerHTML =
+      (V.equipements||[]).map(e=>`<li>${e}</li>`).join("");
+    document.getElementById("villa-regles").innerHTML =
+      (V.regles||[]).map(r=>`<li>${r}</li>`).join("");
+    if(V.lienAnnonce){
+      document.getElementById("villa-lien-wrap").innerHTML =
+        `<a class="btn turq" href="${V.lienAnnonce}" target="_blank" rel="noopener">Voir l'annonce complète →</a>`;
+    }
+    document.querySelectorAll("#villa-galerie img").forEach(img=>
+      img.addEventListener("click",()=>lightbox(img.src)));
+  }
+
+  /* ---------- Navigation ---------- */
+  const secs = ["accueil","villa","infos","agenda","album","livredor"];
+  document.querySelectorAll("#nav button").forEach(b=>{
+    b.addEventListener("click", ()=>{
+      const t = b.dataset.sec;
+      secs.forEach(s=>document.getElementById(s).classList.toggle("hidden", s!==t));
+      document.querySelectorAll("#nav button").forEach(x=>x.classList.toggle("actif", x===b));
+      window.scrollTo({top:0,behavior:"smooth"});
+    });
+  });
+
+  /* ============================================================
+     SUPABASE (chargé dynamiquement si configuré)
+     ============================================================ */
+  async function initSupabase(){
+    if(!hasSupa) return false;
+    await new Promise((res,rej)=>{
+      const s=document.createElement("script");
+      s.src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";
+      s.onload=res; s.onerror=rej; document.head.appendChild(s);
+    });
+    supa = window.supabase.createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
+    const b=document.getElementById("bandeau");
+    b.textContent="✓ Connecté — synchronisé entre tous les invités";
+    b.classList.add("live");
+    return true;
+  }
+
+  /* ============================================================
+     DEMANDE DU NOM (avant toute action RSVP / photo / message)
+     ============================================================ */
+  function demanderNom(callback, raison){
+    const existant = getNom();
+    if(existant){ callback(existant); return; }
+    const g = document.createElement("div");
+    g.className="gate";
+    g.innerHTML = `<div class="box">
+      <h3>Bienvenue 🌺</h3>
+      <p>${raison||"Indiquez votre prénom pour participer."}</p>
+      <input id="gate-nom" placeholder="Votre prénom" style="width:100%;font-size:15px;padding:12px 14px;border:1px solid #e7dcc4;border-radius:6px;margin-bottom:16px" />
+      <button class="btn turq" id="gate-ok">C'est parti !</button>
+    </div>`;
+    document.body.appendChild(g);
+    const input=g.querySelector("#gate-nom");
+    input.focus();
+    function valider(){
+      const v=input.value.trim();
+      if(!v){ input.focus(); return; }
+      setNom(v); g.remove(); callback(v);
+    }
+    g.querySelector("#gate-ok").addEventListener("click", valider);
+    input.addEventListener("keydown", e=>{ if(e.key==="Enter") valider(); });
+  }
+
+  /* ============================================================
+     AGENDA + RSVP
+     ============================================================ */
+  async function chargerRsvp(){
+    // retourne { activiteId: [ {nom, reponse} ] }
+    if(supa){
+      const {data,error}=await supa.from("rsvp").select("activite_id,nom,reponse");
+      if(error){console.warn(error);return {};}
+      const m={}; data.forEach(r=>{(m[r.activite_id]=m[r.activite_id]||[]).push({nom:r.nom,reponse:r.reponse})});
+      return m;
+    } else {
+      // démo : on reconstruit depuis les réponses de cet appareil
+      const mine = lsRsvp(); const m={};
+      Object.keys(mine).forEach(aid=>{ m[aid]=[{nom:getNom()||"Vous", reponse:mine[aid]}]; });
+      return m;
+    }
+  }
+
+  async function enregistrerRsvp(activiteId, reponse, nom){
+    if(supa){
+      const {error}=await supa.from("rsvp")
+        .upsert({activite_id:activiteId, nom:nom, reponse:reponse}, {onConflict:"activite_id,nom"});
+      if(error){console.warn(error); toast("Erreur d'enregistrement"); return;}
+    } else {
+      const mine=lsRsvp(); mine[activiteId]=reponse; lsRsvpSet(mine);
+    }
+    toast(reponse==="oui" ? "Participation confirmée ✓" : "Réponse enregistrée");
+    renderAgenda();
+  }
+
+  async function supprimerRsvp(activiteId, nom){
+    if(supa){
+      const {error}=await supa.from("rsvp").delete().eq("activite_id",activiteId).eq("nom",nom);
+      if(error){console.warn(error); toast("Erreur"); return;}
+    } else {
+      const mine=lsRsvp(); delete mine[activiteId]; lsRsvpSet(mine);
+    }
+    toast("Vous êtes désinscrit·e de cette activité");
+    renderAgenda();
+  }
+
+  let rsvpCache={};
+  async function renderAgenda(){
+    rsvpCache = await chargerRsvp();
+    const monNom = getNom();
+    const html = S.activites.map(a=>{
+      const reps = rsvpCache[a.id]||[];
+      // Date limite propre à cette activité
+      let locked = false;
+      if(a.deadlineISO){
+        const d = new Date(a.deadlineISO + "T23:59:59");
+        if(!isNaN(d.getTime()) && Date.now() > d.getTime()) locked = true;
+      }
+      const ouiNoms = reps.filter(r=>r.reponse==="oui").map(r=>r.nom);
+      const ouiCount = ouiNoms.length;
+      const maRep = (reps.find(r=>r.nom===monNom)||{}).reponse || (!supa ? (lsRsvp()[a.id]||null) : null);
+      const prixTag = a.prix>0
+        ? `<span class="tag-prix">${a.prix} € / pers.</span>`
+        : `<span class="tag-prix tag-gratuit">Inclus / gratuit</span>`;
+      return `<div class="activite${a.highlight?' highlight':''}">
+        <div class="act-date">
+          <div class="jour">${a.jour}</div>
+          <div class="heure">${a.horaire}</div>
+        </div>
+        <div class="act-corps">
+          <h3>${a.titre}</h3>
+          ${a.highlight?'<div class="badge-soiree">★ Le grand soir — à ne pas manquer</div>':''}
+          <div class="act-meta">
+            <span class="puce">📍 ${a.lieu}</span> ${prixTag}
+          </div>
+          <p style="color:var(--gris);font-size:15px">${a.desc}</p>
+        </div>
+        <div class="act-rsvp">
+          <div class="rsvp-q">Vous participez ?</div>
+          ${a.deadline?`<div class="rsvp-deadline${locked?' past':''}">${locked?'⏳ Inscriptions closes':'⏳ Avant le '+a.deadline}</div>`:""}
+          <div class="rsvp-btns">
+            <button class="${maRep==='oui'?'oui-on':''}" data-rsvp="${a.id}" data-rep="oui" ${locked?'disabled':''}>Oui 🙌</button>
+            <button class="${maRep==='non'?'non-on':''}" data-rsvp="${a.id}" data-rep="non" ${locked?'disabled':''}>Non</button>
+          </div>
+          <div class="rsvp-count"><b>${ouiCount}</b> participant${ouiCount>1?'s':''}</div>
+          ${ouiNoms.length?`<ul class="rsvp-liste">${ouiNoms.map(n=>`<li>${escapeHtml(n)}</li>`).join("")}</ul>`:""}
+          ${maRep?`<button class="btn-desinscrire" data-unrsvp="${a.id}" ${locked?'disabled':''}>Se désinscrire</button>`:""}
+        </div>
+      </div>`;
+    }).join("");
+    document.getElementById("liste-activites").innerHTML = html;
+    document.querySelectorAll("[data-rsvp]").forEach(btn=>{
+      btn.addEventListener("click", ()=>{
+        demanderNom(nom=>{
+          enregistrerRsvp(btn.dataset.rsvp, btn.dataset.rep, nom);
+        }, "Indiquez votre prénom pour confirmer votre participation.");
+      });
+    });
+    document.querySelectorAll("[data-unrsvp]").forEach(btn=>{
+      btn.addEventListener("click", ()=>{
+        const nom = getNom();
+        if(!nom){ toast("Aucune inscription à retirer"); return; }
+        supprimerRsvp(btn.dataset.unrsvp, nom);
+      });
+    });
+  }
+
+  /* ============================================================
+     ALBUM PHOTO
+     ============================================================ */
+  function lightbox(src){
+    const lb=document.createElement("div"); lb.className="lightbox";
+    lb.innerHTML=`<img src="${src}" />`;
+    lb.addEventListener("click",()=>lb.remove());
+    document.body.appendChild(lb);
+  }
+
+  async function chargerPhotos(){
+    if(supa){
+      const {data,error}=await supa.from("photos").select("*").order("created_at",{ascending:false});
+      if(error){console.warn(error);return[];}
+      return data.map(p=>({url:p.url, nom:p.nom}));
+    } else {
+      return lsGet("photos");
+    }
+  }
+
+  async function renderAlbum(){
+    const photos = await chargerPhotos();
+    const g=document.getElementById("galerie");
+    const vide=document.getElementById("album-vide");
+    if(!photos.length){ g.innerHTML=""; vide.style.display="block"; return; }
+    vide.style.display="none";
+    g.innerHTML = photos.map(p=>
+      `<figure><img src="${p.url}" loading="lazy" />
+        <figcaption>📸 ${p.nom||"Un invité"}</figcaption></figure>`).join("");
+    g.querySelectorAll("img").forEach(img=>img.addEventListener("click",()=>lightbox(img.src)));
+  }
+
+  document.getElementById("btn-ajouter-photo").addEventListener("click", ()=>{
+    demanderNom(()=>document.getElementById("photo-input").click(),
+      "Indiquez votre prénom pour ajouter vos photos.");
+  });
+
+  document.getElementById("photo-input").addEventListener("change", async (e)=>{
+    const files=[...e.target.files]; if(!files.length) return;
+    const nom=getNom();
+    toast("Ajout en cours...");
+    for(const f of files){
+      if(supa){
+        const path=`${Date.now()}_${Math.random().toString(36).slice(2)}_${f.name}`;
+        const {error:upErr}=await supa.storage.from("photos").upload(path, f);
+        if(upErr){console.warn(upErr); toast("Erreur d'upload"); continue;}
+        const {data:pub}=supa.storage.from("photos").getPublicUrl(path);
+        await supa.from("photos").insert({url:pub.publicUrl, nom:nom});
+      } else {
+        // démo : on stocke en base64 (compressé) dans localStorage
+        const dataUrl = await compresser(f);
+        const arr=lsGet("photos"); arr.unshift({url:dataUrl, nom:nom});
+        try{ lsSet("photos", arr); }
+        catch(err){ toast("Stockage local plein — connecte Supabase pour + de photos"); }
+      }
+    }
+    e.target.value="";
+    toast("Photos ajoutées ✓");
+    renderAlbum();
+  });
+
+  // compression simple pour le mode démo (limite la taille en localStorage)
+  function compresser(file){
+    return new Promise(res=>{
+      const img=new Image(); const r=new FileReader();
+      r.onload=()=>{ img.onload=()=>{
+        const max=1000; let {width:w,height:h}=img;
+        if(w>max||h>max){ const s=max/Math.max(w,h); w*=s; h*=s; }
+        const c=document.createElement("canvas"); c.width=w; c.height=h;
+        c.getContext("2d").drawImage(img,0,0,w,h);
+        res(c.toDataURL("image/jpeg",0.7));
+      }; img.src=r.result; };
+      r.readAsDataURL(file);
+    });
+  }
+
+  /* ============================================================
+     LIVRE D'OR
+     ============================================================ */
+  async function chargerMessages(){
+    if(supa){
+      const {data,error}=await supa.from("livredor").select("*").order("created_at",{ascending:false});
+      if(error){console.warn(error);return[];}
+      return data.map(m=>({nom:m.nom, message:m.message, date:m.created_at}));
+    } else {
+      return lsGet("livredor");
+    }
+  }
+
+  async function renderLivredor(){
+    const msgs = await chargerMessages();
+    const c=document.getElementById("messages-livredor");
+    if(!msgs.length){ c.innerHTML=`<p style="text-align:center;color:var(--gris)">Soyez le premier à laisser un mot 💌</p>`; return; }
+    c.innerHTML = msgs.map(m=>{
+      const d = m.date ? new Date(m.date).toLocaleDateString("fr-FR",{day:"numeric",month:"long"}) : "";
+      return `<div class="message">
+        <div class="date">${d}</div>
+        <div class="txt">« ${escapeHtml(m.message)} »</div>
+        <div class="sig">— ${escapeHtml(m.nom)}</div>
+      </div>`;
+    }).join("");
+  }
+
+  function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+
+  document.getElementById("btn-livredor").addEventListener("click", ()=>{
+    const msg=document.getElementById("ld-msg").value.trim();
+    if(!msg){ toast("Écrivez un petit mot d'abord 🙂"); return; }
+    demanderNom(async (nom)=>{
+      if(supa){
+        const {error}=await supa.from("livredor").insert({nom:nom, message:msg});
+        if(error){console.warn(error); toast("Erreur d'envoi"); return;}
+      } else {
+        const arr=lsGet("livredor");
+        arr.unshift({nom:nom, message:msg, date:new Date().toISOString()});
+        lsSet("livredor", arr);
+      }
+      document.getElementById("ld-msg").value="";
+      toast("Merci pour votre message 💛");
+      renderLivredor();
+    }, "Indiquez votre prénom pour signer votre message.");
+  });
+
+  /* ============================================================
+     DÉMARRAGE
+     ============================================================ */
+  (async function(){
+    try{ await initSupabase(); }catch(e){ console.warn("Supabase indisponible, mode démo.", e); }
+    renderAgenda();
+    renderAlbum();
+    renderLivredor();
+  })();
+
+})();
+</script>
+</body>
+</html>
