@@ -33,9 +33,9 @@ window.SEJOUR = {
   infos: [
     { icone: "🏝️", titre: "La villa", texte: "Bellu & Belpe — Belle Rivière Estate, Bel Ombre, Île Maurice (à 250 m de la plage)" },
     { icone: "🍽️", titre: "Repas", texte: "Tous les repas sont inclus — pension complète, cuisine sur place 🥂" },
-    { icone: "🛬", titre: "Aéroport", texte: "Sir Seewoosagur Ramgoolam (MRU) — ~45 min de route jusqu'à la villa" },
+    { icone: "🛬", titre: "Aéroport", texte: "Sir Seewoosagur Ramgoolam (MRU) — ~45 min de route. Chacun organise son arrivée jusqu'à la villa : pas de transfert collectif prévu." },
     { icone: "📅", titre: "Arrivée / Départ", texte: "Check-in dès 15h le 03/10 · Check-out 11h le 11/10" },
-    { icone: "🌡️", titre: "Météo / À prévoir", texte: "25–28°C. Maillot, crème solaire, tenue légère + une petite laine pour le soir" },
+    { icone: "🌡️", titre: "Météo", texte: "Climat tropical agréable, autour de 25–28°C (printemps austral, saison sèche)." },
     { icone: "📞", titre: "Contacts", texte: "Bertrand : +33 6 41 08 59 15 · Maroa : +33 6 46 36 24 58" }
   ],
   // 📍 Optionnel : lien Google Maps de la villa (laisse vide "" pour masquer le bouton)
@@ -85,14 +85,14 @@ window.SEJOUR = {
   //   deadline    = texte affiché (ex. "1er septembre 2026") — laisse "" pour ne rien afficher
   //   deadlineISO = date AAAA-MM-JJ qui verrouille les boutons une fois passée — laisse "" pour ne jamais verrouiller
   activites: [
-    { id: "a1", jour: "Sam 3 oct", horaire: "15:00", titre: "Arrivée & installation à la villa", lieu: "Villa Bellu & Belpe", prix: 0, deadline: "", deadlineISO: "", desc: "Récupération des chambres et apéro de bienvenue au bord de la piscine." },
+    { id: "a1", jour: "Sam 3 oct", horaire: "15:00", titre: "Arrivée & installation à la villa", lieu: "Villa Bellu & Belpe", prix: 0, logistique: true, deadline: "", deadlineISO: "", desc: "Récupération des chambres et apéro de bienvenue au bord de la piscine." },
     { id: "a2", jour: "Dim 4 oct", horaire: "09:30", titre: "Sortie en bateau", lieu: "Lagon de Bel Ombre", prix: 0, deadline: "20 septembre 2026", deadlineISO: "2026-09-20", desc: "Journée en mer le long de la côte sud : baignade et snorkeling." },
     { id: "a3", jour: "Lun 5 oct", horaire: "10:00", titre: "Initiation surf", lieu: "Plage de Bel Ombre", prix: 0, deadline: "20 septembre 2026", deadlineISO: "2026-09-20", desc: "Cours d'initiation encadré, pour tous les niveaux. Débutants bienvenus !" },
     { id: "a4", jour: "Mar 6 oct", horaire: "19:30", titre: "🎉 Soirée d'anniversaire de mariage", lieu: "Villa — terrasse", prix: 0, highlight: true, deadline: "15 septembre 2026", deadlineISO: "2026-09-15", desc: "LE moment de la semaine : barbecue terre & mer. Tenue : beach elegant, tout en blanc. ✨" },
     { id: "a5", jour: "Mer 7 oct", horaire: "08:30", titre: "Randonnée", lieu: "Parc national de Black River Gorges", prix: 0, deadline: "20 septembre 2026", deadlineISO: "2026-09-20", desc: "Balade nature entre forêts, points de vue et cascades." },
     { id: "a6", jour: "Jeu 8 oct", horaire: "Libre", titre: "Journée détente / plage", lieu: "Villa & plage", prix: 0, deadline: "", deadlineISO: "", desc: "Repos, farniente, piscine. Rien d'organisé, profitez !" },
     { id: "a7", jour: "Ven 9 oct", horaire: "Libre", titre: "Journée libre", lieu: "Villa & alentours", prix: 0, deadline: "", deadlineISO: "", desc: "Au gré de vos envies pour le dernier jour complet." },
-    { id: "a8", jour: "Dim 11 oct", horaire: "11:00", titre: "Départ & transferts aéroport", lieu: "Villa → MRU", prix: 0, deadline: "", deadlineISO: "", desc: "Check-out. Transferts groupés selon les vols." }
+    { id: "a8", jour: "Dim 11 oct", horaire: "11:00", titre: "Départ", lieu: "Villa → MRU", prix: 0, logistique: true, deadline: "", deadlineISO: "", desc: "Check-out. Chacun organise son transfert vers l'aéroport selon son vol." }
   ],
 
   /* ---------- 4. LA VILLA ---------- */
@@ -734,9 +734,10 @@ footer .coeur{color:var(--or)}
       const ouiNoms = reps.filter(r=>r.reponse==="oui").map(r=>r.nom);
       const ouiCount = ouiNoms.length;
       const maRep = (reps.find(r=>r.nom===monNom)||{}).reponse || (!supa ? (lsRsvp()[a.id]||null) : null);
-      const prixTag = a.prix>0
+      const prixTag = a.logistique ? ""
+        : (a.prix>0
         ? `<span class="tag-prix">${a.prix} € / pers.</span>`
-        : `<span class="tag-prix tag-gratuit">Inclus / gratuit</span>`;
+        : `<span class="tag-prix tag-gratuit">Inclus / gratuit</span>`);
       return `<div class="activite${a.highlight?' highlight':''}">
         <div class="act-date">
           <div class="jour">${a.jour}</div>
@@ -750,7 +751,7 @@ footer .coeur{color:var(--or)}
           </div>
           <p style="color:var(--gris);font-size:15px">${a.desc}</p>
         </div>
-        <div class="act-rsvp">
+        ${a.logistique ? "" : `<div class="act-rsvp">
           <div class="rsvp-q">Vous participez ?</div>
           ${a.deadline?`<div class="rsvp-deadline${locked?' past':''}">${locked?'⏳ Inscriptions closes':'⏳ Avant le '+a.deadline}</div>`:""}
           <div class="rsvp-btns">
@@ -760,7 +761,7 @@ footer .coeur{color:var(--or)}
           <div class="rsvp-count"><b>${ouiCount}</b> participant${ouiCount>1?'s':''}</div>
           ${ouiNoms.length?`<ul class="rsvp-liste">${ouiNoms.map(n=>`<li>${escapeHtml(n)}</li>`).join("")}</ul>`:""}
           ${maRep?`<button class="btn-desinscrire" data-unrsvp="${a.id}" ${locked?'disabled':''}>Se désinscrire</button>`:""}
-        </div>
+        </div>`}
       </div>`;
     }).join("");
     document.getElementById("liste-activites").innerHTML = html;
@@ -905,7 +906,7 @@ footer .coeur{color:var(--or)}
     participantsCache = await chargerParticipants();
     const monNom = getNom();
     const c = document.getElementById("participants-liste");
-    if(!participantsCache.length){ c.innerHTML=`<p style="text-align:center;color:var(--gris)">Personne ne s'est encore présenté — lance-toi (si tu veux) 🌺</p>`; return; }
+    if(!participantsCache.length){ c.innerHTML=`<p style="grid-column:1/-1;text-align:center;color:var(--gris)">Personne ne s'est encore présenté — lance-toi (si tu veux) 🌺</p>`; return; }
     c.innerHTML = participantsCache.map((p,i)=>{
       const isMine = monNom && p.prenom===monNom;
       return `<div class="participant-carte">
