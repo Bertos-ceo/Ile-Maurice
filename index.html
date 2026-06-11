@@ -402,7 +402,7 @@ footer .coeur{color:var(--or)}
 <body>
 
 <div id="disclaimer-banner" class="disclaimer-banner"></div>
-<div id="bandeau" class="bandeau-mode">Mode démo (données enregistrées sur cet appareil uniquement)</div>
+<div id="bandeau" class="bandeau-mode" style="display:none"></div>
 
 <nav id="nav">
   <button data-sec="accueil" class="actif">Accueil</button>
@@ -658,8 +658,7 @@ footer .coeur{color:var(--or)}
     });
     supa = window.supabase.createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
     const b=document.getElementById("bandeau");
-    b.textContent="✓ Connecté — synchronisé entre tous les invités";
-    b.classList.add("live");
+    if(b){ b.textContent="✓ Connecté — synchronisé entre tous les invités"; b.classList.add("live"); b.style.display="block"; }
     return true;
   }
 
