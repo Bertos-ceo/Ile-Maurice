@@ -352,7 +352,10 @@ section{padding:64px 0;scroll-margin-top:74px}
   box-shadow:var(--ombre-s);background:var(--blanc);border:1px solid var(--creme-d)}
 .galerie img{width:100%;cursor:pointer;transition:.3s}
 .galerie figure:hover img{transform:scale(1.04)}
-.galerie figcaption{padding:8px 12px;font-size:13px;color:var(--gris)}
+.galerie figcaption{padding:8px 12px;font-size:13px;color:var(--gris);display:flex;justify-content:space-between;align-items:center;gap:8px}
+.photo-actions{display:flex;gap:4px;flex-shrink:0}
+.photo-btn{background:none;border:none;cursor:pointer;font-size:15px;padding:3px 5px;border-radius:6px;line-height:1}
+.photo-btn:hover{background:var(--creme)}
 .album-vide{text-align:center;color:var(--gris);padding:44px;border:1px dashed var(--or);border-radius:var(--r)}
 
 /* ---- LIVRE D'OR ---- */
@@ -799,26 +802,70 @@ footer .coeur{color:var(--or)}
     document.body.appendChild(lb);
   }
 
+  let photosCache = [];
   async function chargerPhotos(){
     if(supa){
       const {data,error}=await supa.from("photos").select("*").order("created_at",{ascending:false});
       if(error){console.warn(error);return[];}
-      return data.map(p=>({url:p.url, nom:p.nom}));
+      return data.map(p=>({id:p.id, url:p.url, nom:p.nom}));
     } else {
-      return lsGet("photos");
+      return lsGet("photos").map((p,i)=>({idx:i, url:p.url, nom:p.nom}));
     }
   }
 
   async function renderAlbum(){
-    const photos = await chargerPhotos();
+    photosCache = await chargerPhotos();
     const g=document.getElementById("galerie");
     const vide=document.getElementById("album-vide");
-    if(!photos.length){ g.innerHTML=""; vide.style.display="block"; return; }
+    if(!photosCache.length){ g.innerHTML=""; vide.style.display="block"; return; }
     vide.style.display="none";
-    g.innerHTML = photos.map(p=>
-      `<figure><img src="${p.url}" loading="lazy" />
-        <figcaption>📸 ${p.nom||"Un invité"}</figcaption></figure>`).join("");
+    g.innerHTML = photosCache.map((p,i)=>
+      `<figure>
+        <img src="${p.url}" loading="lazy" />
+        <figcaption>
+          <span>📸 ${escapeHtml(p.nom||"Un invité")}</span>
+          <span class="photo-actions">
+            <button class="photo-btn" data-dl="${i}" title="Télécharger">⬇️</button>
+            <button class="photo-btn" data-del="${i}" title="Supprimer">🗑️</button>
+          </span>
+        </figcaption>
+      </figure>`).join("");
     g.querySelectorAll("img").forEach(img=>img.addEventListener("click",()=>lightbox(img.src)));
+    g.querySelectorAll("[data-dl]").forEach(b=>b.addEventListener("click",e=>{
+      e.stopPropagation();
+      const p=photosCache[+b.dataset.dl];
+      const base=(p.nom?p.nom.replace(/[^a-zA-Z0-9]+/g,"_"):"photo");
+      telechargerPhoto(p.url, base+"_maurice.jpg");
+    }));
+    g.querySelectorAll("[data-del]").forEach(b=>b.addEventListener("click",e=>{
+      e.stopPropagation();
+      supprimerPhoto(photosCache[+b.dataset.del]);
+    }));
+  }
+
+  async function telechargerPhoto(url, filename){
+    try{
+      const r=await fetch(url); const blob=await r.blob();
+      const u=URL.createObjectURL(blob);
+      const a=document.createElement("a"); a.href=u; a.download=filename||"photo.jpg";
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(()=>URL.revokeObjectURL(u),1500);
+    }catch(e){ window.open(url, "_blank"); }
+  }
+
+  async function supprimerPhoto(p){
+    if(!confirm("Supprimer cette photo ? Cette action est définitive.")) return;
+    if(supa){
+      if(p.id!=null){
+        try{ const m=p.url.match(/\/photos\/(.+)$/); if(m){ await supa.storage.from("photos").remove([decodeURIComponent(m[1])]); } }catch(e){}
+        const {error}=await supa.from("photos").delete().eq("id",p.id);
+        if(error){console.warn(error); toast("Erreur de suppression"); return;}
+      }
+    } else {
+      const arr=lsGet("photos"); arr.splice(p.idx,1); lsSet("photos",arr);
+    }
+    toast("Photo supprimée");
+    renderAlbum();
   }
 
   document.getElementById("btn-ajouter-photo").addEventListener("click", ()=>{
