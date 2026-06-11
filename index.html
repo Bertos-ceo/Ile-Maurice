@@ -113,7 +113,7 @@ window.SEJOUR = {
       "🐾 Animaux non admis",
       "♻️ On laisse la villa aussi belle qu'on l'a trouvée 🌿"
     ],
-    lienAnnonce: "https://mauritius.tripter.com/property/bel-ombre-neighbouring-luxury-villas-for-large-groups"
+    lienAnnonce: ""
   }
 };
 </script>
@@ -200,9 +200,9 @@ section{padding:64px 0;scroll-margin-top:74px}
 .phare{max-width:780px;margin:0 auto 30px;border-radius:var(--r);overflow:hidden;position:relative;
   background:linear-gradient(135deg,var(--vert-d),var(--vert));color:var(--blanc);
   border:1px solid var(--or);box-shadow:var(--ombre)}
-.phare .ruban{position:absolute;top:16px;right:-36px;transform:rotate(45deg);background:var(--or);
-  color:var(--vert-d);font-size:11px;font-weight:600;letter-spacing:1px;padding:5px 42px;text-transform:uppercase}
-.phare .in{padding:30px 32px}
+.phare .ruban{display:inline-block;background:var(--or);color:var(--vert-d);font-size:11px;font-weight:600;
+  letter-spacing:1.5px;padding:5px 14px;border-radius:999px;text-transform:uppercase;margin-bottom:14px}
+.phare .in{padding:28px 32px}
 .phare h3{font-size:26px;margin-bottom:8px;color:var(--or-l)}
 .phare .ev-txt{font-size:15px;opacity:.95;margin-bottom:18px}
 .phare .ev-dress{display:inline-block;background:var(--or-l);color:var(--vert-d);font-weight:600;
@@ -475,7 +475,8 @@ footer .coeur{color:var(--or)}
   const ev = S.evenementPhare;
   if(ev && ev.titre){
     document.getElementById("phare-accueil").innerHTML =
-      `<div class="phare"><div class="ruban">À ne pas manquer</div><div class="in">
+      `<div class="phare"><div class="in">
+        <span class="ruban">★ À ne pas manquer</span>
         <h3>${ev.titre}</h3>
         ${ev.texte ? `<div class="ev-txt">${ev.texte}</div>` : ""}
         ${ev.dressCode ? `<span class="ev-dress">${ev.dressCode}</span>` : ""}
