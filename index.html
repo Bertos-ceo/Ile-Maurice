@@ -50,6 +50,36 @@ window.SEJOUR = {
       "souvenirs mémorables, chacun à son rythme. 💛"
   },
 
+  // 🧳 Section "à mettre dans la valise" (Infos pratiques)
+  valise: {
+    titre: "À mettre dans votre valise 🧳",
+    intro: "Quelques essentiels pour voyager léger mais bien équipé :",
+    items: [
+      "🔌 Adaptateur de prise — Maurice utilise surtout les prises type G (UK, 3 broches) et parfois C (européenne) : prévoyez un adaptateur universel",
+      "🧴 Crème solaire haute protection + après-soleil",
+      "🕶️ Lunettes de soleil, chapeau ou casquette",
+      "🩴 Maillots de bain, tongs, serviette de plage",
+      "👗 Une tenue 'beach elegant' tout en blanc pour la soirée du mardi",
+      "🧥 Une petite laine / veste légère pour les soirées",
+      "🦟 Anti-moustiques",
+      "💊 Trousse de base (paracétamol, pansements, médicaments perso)",
+      "🥾 Chaussures confortables pour la randonnée"
+    ],
+    demande: "🍷 Petite demande de notre part : que chacun apporte deux bouteilles de vin ! Le vin sur place n'est pas terrible, alors on compte sur vous pour garnir la cave commune. Merci d'avance 🙏"
+  },
+
+  // 🚐 Section transport (Infos pratiques)
+  transport: {
+    titre: "Se déplacer sur place 🚐",
+    intro: "Une voiture 7 places est à disposition. Pour les déplacements perso, voici les applis locales (type Uber) :",
+    apps: [
+      "🚕 Yugo — l'appli locale la plus pratique (taxi, et aussi livraison de repas et courses)",
+      "🚖 DodoGo — réservation de taxi instantanée, 24h/24 dans toute l'île",
+      "🚗 MyTaxi Mauritius — autre option de réservation de taxi / transfert"
+    ],
+    note: "Bon à savoir : Uber, Bolt et Lyft ne fonctionnent PAS à Maurice. Téléchargez Yugo ou DodoGo avant de partir."
+  },
+
   /* ---------- 3. AGENDA DES ACTIVITÉS ---------- */
   // Chaque activité peut avoir sa propre date limite d'inscription :
   //   deadline    = texte affiché (ex. "1er septembre 2026") — laisse "" pour ne rien afficher
@@ -195,6 +225,31 @@ section{padding:64px 0;scroll-margin-top:74px}
   border-left:4px solid var(--vert);border-radius:var(--r);padding:28px 32px;box-shadow:var(--ombre-s);text-align:center}
 .regle-vie h3{color:var(--vert);font-size:26px;margin-bottom:10px}
 .regle-vie p{color:var(--encre);font-size:17px;font-family:'Cormorant Garamond',serif;font-style:italic;line-height:1.6}
+
+/* ---- BLOCS INFOS (valise / transport) ---- */
+.info-bloc{max-width:780px;margin:22px auto 0;background:var(--blanc);border:1px solid var(--creme-d);
+  border-left:4px solid var(--or);border-radius:var(--r);padding:26px 30px;box-shadow:var(--ombre-s)}
+.info-bloc h3{color:var(--vert);font-size:23px;margin-bottom:10px}
+.info-bloc-intro{color:var(--gris);font-size:15px;margin-bottom:14px}
+.info-bloc ul{list-style:none}
+.info-bloc li{padding:8px 0;border-bottom:1px dashed var(--creme-d);font-size:15px;color:var(--encre)}
+.info-bloc li:last-child{border-bottom:none}
+.info-demande{margin-top:16px;background:#f7ece0;border:1px solid var(--or-l);border-radius:var(--r);
+  padding:14px 18px;color:var(--vert-d);font-weight:500;font-size:15px}
+.info-note{margin-top:14px;font-size:13px;color:#8a4b32;font-style:italic}
+
+/* ---- PARTICIPANTS ---- */
+.form-hint{font-size:13px;color:var(--gris);font-style:italic;margin:-8px 0 12px}
+.participants-liste{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px;max-width:920px;margin:0 auto}
+.participant-carte{background:var(--blanc);border:1px solid var(--creme-d);border-top:3px solid var(--or);
+  border-radius:var(--r);padding:20px 22px;box-shadow:var(--ombre-s)}
+.participant-carte .p-nom{font-family:'Cormorant Garamond',serif;font-size:23px;color:var(--vert);font-weight:600}
+.participant-carte .p-surnom{font-size:15px;color:var(--or-d);font-style:italic}
+.participant-carte .p-about{margin-top:8px;font-size:14px;color:var(--encre);line-height:1.5}
+.participant-carte .p-about span{color:var(--gris);font-size:12px;text-transform:uppercase;letter-spacing:.5px;display:block}
+.btn-modifier{margin-top:14px;background:none;border:1px solid var(--or);color:var(--or-d);font-size:12px;
+  font-weight:500;cursor:pointer;padding:6px 14px;border-radius:999px;font-family:'Jost',sans-serif;transition:.15s}
+.btn-modifier:hover{background:var(--or);color:var(--vert-d)}
 
 /* ---- ENCART ÉVÉNEMENT PHARE ---- */
 .phare{max-width:780px;margin:0 auto 30px;border-radius:var(--r);overflow:hidden;position:relative;
@@ -344,6 +399,7 @@ footer .coeur{color:var(--or)}
   <button data-sec="villa">La villa</button>
   <button data-sec="infos">Infos pratiques</button>
   <button data-sec="agenda">Agenda &amp; RSVP</button>
+  <button data-sec="participants">Participants</button>
   <button data-sec="album">Album photo</button>
   <button data-sec="livredor">Livre d'or</button>
 </nav>
@@ -394,6 +450,8 @@ footer .coeur{color:var(--or)}
     <p class="intro-sec">Tout ce qu'il faut savoir pour profiter du séjour en toute sérénité.</p>
     <div class="grille-infos" id="grille-infos"></div>
     <div id="regle-de-vie"></div>
+    <div id="valise-bloc"></div>
+    <div id="transport-bloc"></div>
   </section>
 
   <!-- AGENDA -->
@@ -401,6 +459,23 @@ footer .coeur{color:var(--or)}
     <h2 class="titre-sec">Agenda des activités</h2>
     <p class="intro-sec">Indiquez votre participation à chaque activité. Les prix sont par personne (paiement réglé sur place, rien à saisir ici).</p>
     <div id="liste-activites"></div>
+  </section>
+
+  <!-- PARTICIPANTS -->
+  <section id="participants" class="hidden">
+    <h2 class="titre-sec">Les participants</h2>
+    <p class="intro-sec">Présente-toi en deux mots pour qu'on apprenne à se connaître avant le grand départ ! <strong>C'est totalement optionnel</strong> — uniquement pour le plaisir, rien d'obligatoire 😊</p>
+    <div class="formulaire">
+      <label for="p-prenom">Ton prénom</label>
+      <input id="p-prenom" placeholder="Ex. Camille" />
+      <label for="p-surnom">Comment tu aimes qu'on t'appelle</label>
+      <input id="p-surnom" placeholder="Surnom, diminutif… (ou laisse vide)" />
+      <label for="p-about">Pour bien s'entendre avec moi, parle-moi de…</label>
+      <p class="form-hint">Quelques idées : ta passion (avouable ou pas 😄), ton plat préféré, ce qui te fait rire, l'animal que tu serais, ta meilleure anecdote de voyage, le rhum arrangé que tu veux absolument tester…</p>
+      <textarea id="p-about" placeholder="Ex. mon chien, les bons petits restos, les couchers de soleil et ma passion bizarre pour les playlists parfaites…"></textarea>
+      <button class="btn" id="btn-participant">Je me présente 🌴</button>
+    </div>
+    <div class="participants-liste" id="participants-liste"></div>
   </section>
 
   <!-- ALBUM -->
@@ -506,6 +581,26 @@ footer .coeur{color:var(--or)}
       `<div class="regle-vie"><h3>${rdv.titre||"Règles de vie"}</h3><p>${rdv.texte}</p></div>`;
   }
 
+  // Encart "à mettre dans la valise"
+  const val = S.valise;
+  if(val && val.items){
+    document.getElementById("valise-bloc").innerHTML =
+      `<div class="info-bloc"><h3>${val.titre||"À mettre dans votre valise"}</h3>` +
+      (val.intro?`<p class="info-bloc-intro">${val.intro}</p>`:"") +
+      `<ul>${val.items.map(i=>`<li>${i}</li>`).join("")}</ul>` +
+      (val.demande?`<div class="info-demande">${val.demande}</div>`:"") + `</div>`;
+  }
+
+  // Encart "transport"
+  const tr = S.transport;
+  if(tr && tr.apps){
+    document.getElementById("transport-bloc").innerHTML =
+      `<div class="info-bloc"><h3>${tr.titre||"Se déplacer"}</h3>` +
+      (tr.intro?`<p class="info-bloc-intro">${tr.intro}</p>`:"") +
+      `<ul>${tr.apps.map(i=>`<li>${i}</li>`).join("")}</ul>` +
+      (tr.note?`<div class="info-note">${tr.note}</div>`:"") + `</div>`;
+  }
+
   /* ---------- Section Villa ---------- */
   const V = S.villa;
   if(V){
@@ -530,7 +625,7 @@ footer .coeur{color:var(--or)}
   }
 
   /* ---------- Navigation ---------- */
-  const secs = ["accueil","villa","infos","agenda","album","livredor"];
+  const secs = ["accueil","villa","infos","agenda","participants","album","livredor"];
   document.querySelectorAll("#nav button").forEach(b=>{
     b.addEventListener("click", ()=>{
       const t = b.dataset.sec;
@@ -790,6 +885,87 @@ footer .coeur{color:var(--or)}
 
   function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 
+  /* ============================================================
+     PARTICIPANTS
+     ============================================================ */
+  let participantsCache = [];
+  let editingParticipant = null; // {id} (Supabase) ou {idx} (démo)
+
+  async function chargerParticipants(){
+    if(supa){
+      const {data,error}=await supa.from("participants").select("*").order("created_at",{ascending:true});
+      if(error){console.warn(error);return[];}
+      return data.map(p=>({id:p.id, prenom:p.prenom, surnom:p.surnom, about:p.about}));
+    } else {
+      return lsGet("participants").map((p,i)=>({idx:i, prenom:p.prenom, surnom:p.surnom, about:p.about}));
+    }
+  }
+
+  async function renderParticipants(){
+    participantsCache = await chargerParticipants();
+    const monNom = getNom();
+    const c = document.getElementById("participants-liste");
+    if(!participantsCache.length){ c.innerHTML=`<p style="text-align:center;color:var(--gris)">Personne ne s'est encore présenté — lance-toi (si tu veux) 🌺</p>`; return; }
+    c.innerHTML = participantsCache.map((p,i)=>{
+      const isMine = monNom && p.prenom===monNom;
+      return `<div class="participant-carte">
+        <div class="p-nom">${escapeHtml(p.prenom)}${p.surnom?` <span class="p-surnom">« ${escapeHtml(p.surnom)} »</span>`:""}</div>
+        ${p.about?`<div class="p-about"><span>Parlez-moi de :</span> ${escapeHtml(p.about)}</div>`:""}
+        ${isMine?`<button class="btn-modifier" data-pi="${i}">✏️ Modifier ma description</button>`:""}
+      </div>`;
+    }).join("");
+    c.querySelectorAll("[data-pi]").forEach(btn=>{
+      btn.addEventListener("click", ()=>{
+        const p = participantsCache[Number(btn.dataset.pi)];
+        if(!p) return;
+        document.getElementById("p-prenom").value = p.prenom||"";
+        document.getElementById("p-surnom").value = p.surnom||"";
+        document.getElementById("p-about").value = p.about||"";
+        editingParticipant = supa ? {id:p.id} : {idx:p.idx};
+        document.getElementById("btn-participant").textContent = "Mettre à jour ✏️";
+        document.getElementById("p-prenom").scrollIntoView({behavior:"smooth", block:"center"});
+        toast("Modifie ta description puis valide ✏️");
+      });
+    });
+  }
+
+  function resetFormParticipant(){
+    document.getElementById("p-prenom").value="";
+    document.getElementById("p-surnom").value="";
+    document.getElementById("p-about").value="";
+    editingParticipant = null;
+    document.getElementById("btn-participant").textContent = "Je me présente 🌴";
+  }
+
+  document.getElementById("btn-participant").addEventListener("click", async ()=>{
+    const prenom=document.getElementById("p-prenom").value.trim();
+    const surnom=document.getElementById("p-surnom").value.trim();
+    const about=document.getElementById("p-about").value.trim();
+    if(!prenom){ toast("Indique au moins ton prénom 🙂"); return; }
+    if(editingParticipant){
+      // Mise à jour d'une fiche existante
+      if(supa && editingParticipant.id!=null){
+        const {error}=await supa.from("participants").update({prenom:prenom, surnom:surnom, about:about}).eq("id",editingParticipant.id);
+        if(error){console.warn(error); toast("Erreur de mise à jour"); return;}
+      } else {
+        const arr=lsGet("participants"); arr[editingParticipant.idx]={prenom:prenom, surnom:surnom, about:about}; lsSet("participants", arr);
+      }
+      toast("Description mise à jour ✓");
+    } else {
+      // Nouvelle présentation
+      if(supa){
+        const {error}=await supa.from("participants").insert({prenom:prenom, surnom:surnom, about:about});
+        if(error){console.warn(error); toast("Erreur d'enregistrement"); return;}
+      } else {
+        const arr=lsGet("participants"); arr.push({prenom:prenom, surnom:surnom, about:about}); lsSet("participants", arr);
+      }
+      toast("Bienvenue dans l'aventure ! 🎉");
+    }
+    setNom(prenom); // identifie l'invité (présentation, RSVP, modif)
+    resetFormParticipant();
+    renderParticipants();
+  });
+
   document.getElementById("btn-livredor").addEventListener("click", ()=>{
     const msg=document.getElementById("ld-msg").value.trim();
     if(!msg){ toast("Écrivez un petit mot d'abord 🙂"); return; }
@@ -814,6 +990,7 @@ footer .coeur{color:var(--or)}
   (async function(){
     try{ await initSupabase(); }catch(e){ console.warn("Supabase indisponible, mode démo.", e); }
     renderAgenda();
+    renderParticipants();
     renderAlbum();
     renderLivredor();
   })();
