@@ -395,7 +395,9 @@ section{padding:64px 0;scroll-margin-top:74px}
 footer{text-align:center;padding:46px 20px;background:var(--vert-d);color:var(--creme-d);font-size:14px;letter-spacing:.5px}
 footer .coeur{color:var(--or)}
 .gate{position:fixed;inset:0;background:rgba(10,47,39,.65);display:flex;align-items:center;justify-content:center;z-index:200;padding:20px}
-.gate .box{background:var(--blanc);border:1px solid var(--or);border-radius:var(--r);padding:36px;max-width:420px;width:100%;box-shadow:var(--ombre);text-align:center}
+.gate .box{position:relative;background:var(--blanc);border:1px solid var(--or);border-radius:var(--r);padding:36px;max-width:420px;width:100%;box-shadow:var(--ombre);text-align:center}
+.gate-close{position:absolute;top:12px;right:14px;background:none;border:none;font-size:20px;line-height:1;color:var(--gris);cursor:pointer;padding:4px 8px;border-radius:8px}
+.gate-close:hover{background:var(--creme);color:var(--vert)}
 .gate h3{color:var(--vert);font-size:30px;margin-bottom:8px}
 .gate p{color:var(--gris);margin-bottom:18px;font-size:15px}
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(120px);background:var(--vert-d);
@@ -676,6 +678,7 @@ footer .coeur{color:var(--or)}
     const g = document.createElement("div");
     g.className="gate";
     g.innerHTML = `<div class="box">
+      <button class="gate-close" id="gate-close" aria-label="Fermer">✕</button>
       <h3>Bienvenue 🌺</h3>
       <p>${raison||"Indiquez votre prénom pour participer."}</p>
       <input id="gate-nom" placeholder="Votre prénom" style="width:100%;font-size:15px;padding:12px 14px;border:1px solid #e7dcc4;border-radius:6px;margin-bottom:16px" />
@@ -684,13 +687,16 @@ footer .coeur{color:var(--or)}
     document.body.appendChild(g);
     const input=g.querySelector("#gate-nom");
     input.focus();
+    function fermer(){ g.remove(); }
     function valider(){
       const v=input.value.trim();
       if(!v){ input.focus(); return; }
       setNom(v); g.remove(); callback(v);
     }
     g.querySelector("#gate-ok").addEventListener("click", valider);
-    input.addEventListener("keydown", e=>{ if(e.key==="Enter") valider(); });
+    g.querySelector("#gate-close").addEventListener("click", fermer);
+    g.addEventListener("click", e=>{ if(e.target===g) fermer(); });
+    input.addEventListener("keydown", e=>{ if(e.key==="Enter") valider(); if(e.key==="Escape") fermer(); });
   }
 
   /* ============================================================
