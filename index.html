@@ -88,14 +88,14 @@ window.SEJOUR = {
   //   deadlineISO = date AAAA-MM-JJ qui verrouille les boutons une fois passée — laisse "" pour ne jamais verrouiller
   activites: [
     { id: "a1", jour: "Sam 3 oct", horaire: "15:00", titre: "Arrivée & installation à la villa", lieu: "Villa Bellu & Belpe", prix: 0, logistique: true, deadline: "", deadlineISO: "", desc: "Récupération des chambres et apéro de bienvenue au bord de la piscine." },
-    { id: "a2", jour: "Dim 4 oct", horaire: "09:30", titre: "Sortie en bateau", lieu: "Lagon de Bel Ombre", prix: 0, deadline: "20 septembre 2026", deadlineISO: "2026-09-20", desc: "Journée en mer le long de la côte sud : baignade et snorkeling." },
-    { id: "a3", jour: "Lun 5 oct", horaire: "10:00", titre: "Initiation surf", lieu: "Plage de Bel Ombre", prix: 0, deadline: "20 septembre 2026", deadlineISO: "2026-09-20", desc: "Cours d'initiation encadré, pour tous les niveaux. Débutants bienvenus !" },
-    { id: "a4", jour: "Mar 6 oct", horaire: "09:00", titre: "Randonnée", lieu: "Parc national de Black River Gorges", prix: 0, deadline: "20 septembre 2026", deadlineISO: "2026-09-20", desc: "Balade nature en journée : forêts, points de vue et cascades." },
+    { id: "a2", jour: "Dim 4 oct", horaire: "09:30", titre: "Sortie en bateau", lieu: "Lagon de Bel Ombre", prix: 0, prixTexte: "Prix à définir", deadline: "20 septembre 2026", deadlineISO: "2026-09-20", desc: "Journée en mer le long de la côte sud : baignade et snorkeling." },
+    { id: "a3", jour: "Lun 5 oct", horaire: "10:00", titre: "Initiation surf", lieu: "Plage de Bel Ombre", prix: 0, prixTexte: "Prix à définir", deadline: "20 septembre 2026", deadlineISO: "2026-09-20", desc: "Cours d'initiation encadré, pour tous les niveaux. Débutants bienvenus !" },
+    { id: "a4", jour: "Mar 6 oct", horaire: "09:00", titre: "Randonnée", lieu: "Parc national de Black River Gorges", prix: 0, prixTexte: "Prix à définir", deadline: "20 septembre 2026", deadlineISO: "2026-09-20", desc: "Balade nature en journée : forêts, points de vue et cascades." },
     { id: "a5", jour: "Mar 6 oct", horaire: "19:30", titre: "🎉 Soirée d'anniversaire de mariage", lieu: "Villa — terrasse", prix: 0, highlight: true, deadline: "15 septembre 2026", deadlineISO: "2026-09-15", desc: "LE moment de la semaine : barbecue terre & mer. Tenue : beach elegant, tout en blanc. ✨" },
     { id: "a6", jour: "Mer 7 oct", horaire: "Libre", titre: "Détente / plage", lieu: "Villa & plage", prix: 0, deadline: "", deadlineISO: "", desc: "Repos, farniente, piscine. Profitez de la plage à votre rythme." },
     { id: "a11", jour: "Mer 7 oct", horaire: "21:00", titre: "🃏 Tournoi de poker", lieu: "Villa — salon", prix: 0, deadline: "20 septembre 2026", deadlineISO: "2026-09-20", desc: "Tournoi de poker entre invités après le dîner. Pour le fun !" },
-    { id: "a7", jour: "Jeu 8 oct", horaire: "10:00", titre: "🎾 Tournoi de padel", lieu: "Courts à proximité", prix: 0, deadline: "20 septembre 2026", deadlineISO: "2026-09-20", desc: "Tournoi amical par équipes, tous niveaux. Fun garanti !" },
-    { id: "a8", jour: "Ven 9 oct", horaire: "10:00", titre: "🛍️ Virée shopping", lieu: "Bagatelle Mall / artisanat local", prix: 0, deadline: "20 septembre 2026", deadlineISO: "2026-09-20", desc: "Sortie shopping : souvenirs, artisanat local et centres commerciaux." },
+    { id: "a7", jour: "Jeu 8 oct", horaire: "10:00", titre: "🎾 Tournoi de padel", lieu: "Courts à proximité", prix: 0, prixTexte: "Prix à définir", deadline: "20 septembre 2026", deadlineISO: "2026-09-20", desc: "Tournoi amical par équipes, tous niveaux. Fun garanti !" },
+    { id: "a8", jour: "Ven 9 oct", horaire: "10:00", titre: "🛍️ Virée shopping", lieu: "Bagatelle Mall / artisanat local", prix: 0, prixTexte: "Prix à définir", deadline: "20 septembre 2026", deadlineISO: "2026-09-20", desc: "Sortie shopping : souvenirs, artisanat local et centres commerciaux." },
     { id: "a9", jour: "Sam 10 oct", horaire: "Libre", titre: "Journée libre", lieu: "Villa & alentours", prix: 0, deadline: "", deadlineISO: "", desc: "Au gré de vos envies pour le dernier jour complet." },
     { id: "a10", jour: "Dim 11 oct", horaire: "11:00", titre: "Départ", lieu: "Villa → MRU", prix: 0, logistique: true, deadline: "", deadlineISO: "", desc: "Check-out. Chacun organise son transfert vers l'aéroport selon son vol." }
   ],
@@ -750,6 +750,8 @@ footer .coeur{color:var(--or)}
       const ouiCount = ouiNoms.length;
       const maRep = (reps.find(r=>r.nom===monNom)||{}).reponse || (!supa ? (lsRsvp()[a.id]||null) : null);
       const prixTag = a.logistique ? ""
+        : a.prixTexte
+        ? `<span class="tag-prix">${a.prixTexte}</span>`
         : (a.prix>0
         ? `<span class="tag-prix">${a.prix} € / pers.</span>`
         : `<span class="tag-prix tag-gratuit">Inclus / gratuit</span>`);
