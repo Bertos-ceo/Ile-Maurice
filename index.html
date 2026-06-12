@@ -255,6 +255,11 @@ section{padding:64px 0;scroll-margin-top:74px}
 .btn-modifier{margin-top:14px;background:none;border:1px solid var(--or);color:var(--or-d);font-size:12px;
   font-weight:500;cursor:pointer;padding:6px 14px;border-radius:999px;font-family:'Jost',sans-serif;transition:.15s}
 .btn-modifier:hover{background:var(--or);color:var(--vert-d)}
+.p-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.p-actions .btn-modifier{margin-top:0}
+.btn-suppr-p{background:none;border:1px solid #c98a6a;color:#8a4b32;font-size:12px;font-weight:500;
+  cursor:pointer;padding:6px 12px;border-radius:999px;font-family:'Jost',sans-serif;transition:.15s}
+.btn-suppr-p:hover{background:#8a4b32;color:#fff;border-color:#8a4b32}
 
 /* ---- ENCART ÉVÉNEMENT PHARE ---- */
 .phare{max-width:780px;margin:0 auto 30px;border-radius:var(--r);overflow:hidden;position:relative;
@@ -966,7 +971,7 @@ footer .coeur{color:var(--or)}
       return `<div class="participant-carte">
         <div class="p-nom">${escapeHtml(p.prenom)}${p.surnom?` <span class="p-surnom">« ${escapeHtml(p.surnom)} »</span>`:""}</div>
         ${p.about?`<div class="p-about"><span>Parlez-moi de :</span> ${escapeHtml(p.about)}</div>`:""}
-        ${isMine?`<button class="btn-modifier" data-pi="${i}">✏️ Modifier ma description</button>`:""}
+        ${isMine?`<div class="p-actions"><button class="btn-modifier" data-pi="${i}">✏️ Modifier</button><button class="btn-suppr-p" data-pdel="${i}">🗑️ Supprimer</button></div>`:""}
       </div>`;
     }).join("");
     c.querySelectorAll("[data-pi]").forEach(btn=>{
@@ -982,6 +987,43 @@ footer .coeur{color:var(--or)}
         toast("Modifie ta description puis valide ✏️");
       });
     });
+    c.querySelectorAll("[data-pdel]").forEach(btn=>{
+      btn.addEventListener("click", ()=>{
+        supprimerParticipant(participantsCache[Number(btn.dataset.pdel)]);
+      });
+    });
+  }
+
+  async function supprimerParticipant(p){
+    if(!p) return;
+    if(!confirm("Supprimer ta présentation ?")) return;
+    if(supa){
+      if(p.id!=null){
+        const {error}=await supa.from("participants").delete().eq("id",p.id);
+        if(error){console.warn(error); toast("Erreur de suppression"); return;}
+      }
+    } else {
+      const arr=lsGet("participants"); arr.splice(p.idx,1); lsSet("participants", arr);
+    }
+    resetFormParticipant();
+    toast("Présentation supprimée");
+    renderParticipants();
+  }
+
+  // Jolie notification de validation après une présentation
+  function notifPresentation(prenom, wasEditing){
+    const g=document.createElement("div"); g.className="gate";
+    g.innerHTML = `<div class="box">
+      <h3>${wasEditing ? "C'est mis à jour ✏️" : "Bienvenue à bord 🌴"}</h3>
+      <p>${wasEditing
+        ? `Merci ${escapeHtml(prenom)}, ta description a bien été modifiée 💛`
+        : `Merci ${escapeHtml(prenom)} ! Ta présentation est enregistrée. On a hâte de partager ce séjour de rêve avec toi 🌺🥂`}</p>
+      <button class="btn turq" id="notif-ok">Super !</button>
+    </div>`;
+    document.body.appendChild(g);
+    const ok=g.querySelector("#notif-ok"); ok.focus();
+    ok.addEventListener("click", ()=>g.remove());
+    g.addEventListener("click", e=>{ if(e.target===g) g.remove(); });
   }
 
   function resetFormParticipant(){
@@ -997,6 +1039,7 @@ footer .coeur{color:var(--or)}
     const surnom=document.getElementById("p-surnom").value.trim();
     const about=document.getElementById("p-about").value.trim();
     if(!prenom){ toast("Indique au moins ton prénom 🙂"); return; }
+    const wasEditing = !!editingParticipant;
     if(editingParticipant){
       // Mise à jour d'une fiche existante
       if(supa && editingParticipant.id!=null){
@@ -1005,7 +1048,6 @@ footer .coeur{color:var(--or)}
       } else {
         const arr=lsGet("participants"); arr[editingParticipant.idx]={prenom:prenom, surnom:surnom, about:about}; lsSet("participants", arr);
       }
-      toast("Description mise à jour ✓");
     } else {
       // Nouvelle présentation
       if(supa){
@@ -1014,11 +1056,11 @@ footer .coeur{color:var(--or)}
       } else {
         const arr=lsGet("participants"); arr.push({prenom:prenom, surnom:surnom, about:about}); lsSet("participants", arr);
       }
-      toast("Bienvenue dans l'aventure ! 🎉");
     }
     setNom(prenom); // identifie l'invité (présentation, RSVP, modif)
     resetFormParticipant();
     renderParticipants();
+    notifPresentation(prenom, wasEditing);
   });
 
   document.getElementById("btn-livredor").addEventListener("click", ()=>{
