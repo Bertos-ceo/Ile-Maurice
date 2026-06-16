@@ -88,14 +88,16 @@ window.SEJOUR = {
   //   deadlineISO = date AAAA-MM-JJ qui verrouille les boutons une fois passée — laisse "" pour ne jamais verrouiller
   activites: [
     { id: "a1", jour: "Sam 3 oct", horaire: "15:00", titre: "Arrivée & installation à la villa", lieu: "Villa Bellu & Belpe", prix: 0, logistique: true, deadline: "", deadlineISO: "", desc: "Récupération des chambres et apéro de bienvenue au bord de la piscine." },
-    { id: "a2", jour: "Dim 4 oct", horaire: "09:30", titre: "Sortie en bateau", lieu: "Lagon de Bel Ombre", prix: 0, prixTexte: "Prix à définir", deadline: "20 septembre 2026", deadlineISO: "2026-09-20", desc: "Journée en mer le long de la côte sud : baignade et snorkeling." },
+    { id: "a4", jour: "Dim 4 oct", horaire: "09:00", titre: "🥾 Randonnée des 7 Cascades", lieu: "Tamarin Falls", prix: 0, prixTexte: "Gratuit (juste l'effort !)", difficulte: "Facile", deadline: "20 septembre 2026", deadlineISO: "2026-09-20", desc: "Randonnée guidée au cœur de la nature jusqu'aux 7 cascades. Baignade possible dans les bassins 💦" },
     { id: "a3", jour: "Lun 5 oct", horaire: "10:00", titre: "Initiation surf", lieu: "Plage de Bel Ombre", prix: 0, prixTexte: "Prix à définir", deadline: "20 septembre 2026", deadlineISO: "2026-09-20", desc: "Cours d'initiation encadré, pour tous les niveaux. Débutants bienvenus !" },
-    { id: "a4", jour: "Mar 6 oct", horaire: "09:00", titre: "Randonnée", lieu: "Parc national de Black River Gorges", prix: 0, prixTexte: "Prix à définir", deadline: "20 septembre 2026", deadlineISO: "2026-09-20", desc: "Balade nature en journée : forêts, points de vue et cascades." },
+    { id: "a2", jour: "Mar 6 oct", horaire: "09:00", titre: "🚤 Excursion 3 îles du Nord (speedboat)", lieu: "Coin de Mire · Île Gabriel · Île Plate", prix: 75, deadline: "20 septembre 2026", deadlineISO: "2026-09-20", desc: "Journée en speedboat vers les 3 îles du Nord. Barbecue et boissons (alcoolisées) inclus 🍹🔥" },
     { id: "a5", jour: "Mar 6 oct", horaire: "19:30", titre: "🎉 Soirée d'anniversaire de mariage", lieu: "Villa — terrasse", prix: 0, highlight: true, deadline: "15 septembre 2026", deadlineISO: "2026-09-15", desc: "LE moment de la semaine : barbecue terre & mer. Tenue : beach elegant, tout en blanc. ✨" },
-    { id: "a6", jour: "Mer 7 oct", horaire: "Libre", titre: "Détente / plage", lieu: "Villa & plage", prix: 0, deadline: "", deadlineISO: "", desc: "Repos, farniente, piscine. Profitez de la plage à votre rythme." },
+    { id: "a13", jour: "Mer 7 oct", horaire: "08:00", titre: "⛰️ Randonnée du Morne Brabant", lieu: "Le Morne Brabant (UNESCO)", prix: 0, prixTexte: "Gratuit (juste l'effort !)", difficulte: "Difficile", duree: "~4h", deadline: "20 septembre 2026", deadlineISO: "2026-09-20", desc: "Ascension jusqu'au 1er plateau uniquement (montée raide). Vue panoramique exceptionnelle sur le lagon. Site classé UNESCO." },
+    { id: "a6", jour: "Mer 7 oct", horaire: "Libre", titre: "Détente / plage", lieu: "Villa & plage", prix: 0, deadline: "", deadlineISO: "", desc: "Repos, farniente, piscine — l'après-midi pour récupérer de la randonnée." },
     { id: "a11", jour: "Mer 7 oct", horaire: "21:00", titre: "🃏 Tournoi de poker", lieu: "Villa — salon", prix: 0, deadline: "20 septembre 2026", deadlineISO: "2026-09-20", desc: "Tournoi de poker entre invités après le dîner. Pour le fun !" },
     { id: "a7", jour: "Jeu 8 oct", horaire: "10:00", titre: "🎾 Tournoi de padel", lieu: "Courts à proximité", prix: 0, prixTexte: "Prix à définir", deadline: "20 septembre 2026", deadlineISO: "2026-09-20", desc: "Tournoi amical par équipes, tous niveaux. Fun garanti !" },
-    { id: "a8", jour: "Ven 9 oct", horaire: "10:00", titre: "🛍️ Virée shopping", lieu: "Bagatelle Mall / artisanat local", prix: 0, prixTexte: "Prix à définir", deadline: "20 septembre 2026", deadlineISO: "2026-09-20", desc: "Sortie shopping : souvenirs, artisanat local et centres commerciaux." },
+    { id: "a12", jour: "Ven 9 oct", horaire: "09:30", titre: "🏖️ Côte Ouest & Le Morne", lieu: "Tamarin · Le Morne Brabant (UNESCO)", prix: 0, prixTexte: "Prix à définir", deadline: "20 septembre 2026", deadlineISO: "2026-09-20", desc: "Les plus belles plages de la côte ouest, l'ambiance détendue de Tamarin et la vue sur le majestueux Morne Brabant." },
+    { id: "a8", jour: "Ven 9 oct", horaire: "14:00", titre: "🛍️ Virée shopping", lieu: "Bagatelle Mall / artisanat local", prix: 0, prixTexte: "Prix à définir", deadline: "20 septembre 2026", deadlineISO: "2026-09-20", desc: "Sortie shopping : souvenirs, artisanat local et centres commerciaux." },
     { id: "a9", jour: "Sam 10 oct", horaire: "Libre", titre: "Journée libre", lieu: "Villa & alentours", prix: 0, deadline: "", deadlineISO: "", desc: "Au gré de vos envies pour le dernier jour complet." },
     { id: "a10", jour: "Dim 11 oct", horaire: "11:00", titre: "Départ", lieu: "Villa → MRU", prix: 0, logistique: true, deadline: "", deadlineISO: "", desc: "Check-out. Chacun organise son transfert vers l'aéroport selon son vol." }
   ],
@@ -319,6 +321,9 @@ section{padding:64px 0;scroll-margin-top:74px}
 .tag-prix{background:var(--creme);border:1px solid var(--creme-d);border-radius:999px;padding:2px 12px;
   font-weight:500;color:var(--or-d);font-size:13px}
 .tag-gratuit{color:var(--vert-l)}
+.tag-diff{display:inline-block;background:var(--creme);border:1px solid var(--creme-d);border-radius:999px;padding:2px 12px;font-weight:500;font-size:13px;color:var(--gris)}
+.tag-diff.diff-easy{color:#2e7d52;border-color:#a9d6bd}
+.tag-diff.diff-hard{color:#8a4b32;border-color:#d8b08c}
 .act-rsvp{flex:0 0 auto;display:flex;flex-direction:column;gap:8px;align-items:stretch;min-width:160px}
 .rsvp-q{font-size:12px;font-weight:500;color:var(--gris);text-transform:uppercase;letter-spacing:1px}
 .rsvp-btns{display:flex;gap:8px}
@@ -771,6 +776,8 @@ footer .coeur{color:var(--or)}
           ${a.highlight?'<div class="badge-soiree">★ Le grand soir — à ne pas manquer</div>':''}
           <div class="act-meta">
             <span class="puce">📍 ${a.lieu}</span> ${prixTag}
+            ${a.difficulte?`<span class="tag-diff ${a.difficulte.toLowerCase()==='difficile'?'diff-hard':(a.difficulte.toLowerCase()==='facile'?'diff-easy':'')}">⛰️ ${a.difficulte}</span>`:""}
+            ${a.duree?`<span class="puce">⏱️ ${a.duree}</span>`:""}
           </div>
           <p style="color:var(--gris);font-size:15px">${a.desc}</p>
         </div>
