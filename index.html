@@ -196,13 +196,19 @@ nav button.actif{color:var(--vert);border-bottom-color:var(--or)}
 /* ---- HERO ---- */
 header.hero{position:relative;text-align:center;color:var(--blanc);padding:120px 20px 110px;
   background:linear-gradient(180deg,rgba(10,47,39,.5),rgba(10,47,39,.82)),
-    url("https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?auto=format&fit=crop&w=1600&q=80") center/cover}
+    url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80") center/cover}
 header.hero:after{content:"";position:absolute;inset:18px;border:1px solid rgba(230,207,148,.55);pointer-events:none}
 header.hero .kicker{letter-spacing:5px;text-transform:uppercase;font-size:12px;color:var(--or-l);margin-bottom:18px;font-weight:400}
 header.hero h1{font-size:clamp(46px,8vw,86px);font-weight:600;margin-bottom:12px;text-shadow:0 2px 24px rgba(0,0,0,.3)}
 header.hero .sub{font-size:clamp(17px,3vw,23px);font-style:italic;font-family:'Cormorant Garamond',serif;opacity:.96}
 header.hero .dates{margin-top:22px;display:inline-block;border:1px solid var(--or-l);color:var(--or-l);
   padding:9px 26px;font-size:13px;letter-spacing:2px;text-transform:uppercase}
+@media(max-width:600px){
+  header.hero{padding:56px 18px 52px}
+  header.hero:after{inset:12px}
+  header.hero .kicker{margin-bottom:12px}
+  header.hero .dates{margin-top:16px}
+}
 
 /* ---- SECTIONS ---- */
 main{max-width:1020px;margin:0 auto;padding:0 18px}
@@ -654,7 +660,15 @@ footer .coeur{color:var(--or)}
       const t = b.dataset.sec;
       secs.forEach(s=>document.getElementById(s).classList.toggle("hidden", s!==t));
       document.querySelectorAll("#nav button").forEach(x=>x.classList.toggle("actif", x===b));
-      window.scrollTo({top:0,behavior:"smooth"});
+      if(t==="accueil"){
+        window.scrollTo({top:0, behavior:"smooth"});
+      } else {
+        // Défile jusqu'au contenu de la section (sous la barre de nav), pour que le changement soit visible
+        const nav=document.getElementById("nav");
+        const sec=document.getElementById(t);
+        const y=sec.getBoundingClientRect().top + window.pageYOffset - (nav.offsetHeight + 6);
+        window.scrollTo({top: Math.max(0,y), behavior:"smooth"});
+      }
     });
   });
 
